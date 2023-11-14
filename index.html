@@ -58,6 +58,7 @@
   });
 
   // Функция проверки через WebSocket
+  // Функция проверки через WebSocket
   function pruefeAusweisAppWebSocket() {
     var registerButton = document.getElementById('registerButton');
     registerButton.disabled = true; // Делаем кнопку неактивной
@@ -68,6 +69,9 @@
       console.log('AusweisApp WebSocket-Verbindung hergestellt.');
       wsVerbindung.close();
       registerButton.disabled = false; // Снова делаем кнопку активной
+
+      // Перенаправляем пользователя на другую страницу после успешного соединения
+      window.location.href = 'https://www.google.com';
     };
 
     wsVerbindung.onerror = function (error) {
