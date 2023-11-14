@@ -42,13 +42,13 @@
 <script>
   // Функция для отображения модального окна
   function showModal() {
-    var modal = document.getElementById('modal');
+    const modal = document.getElementById('modal');
     modal.style.display = "block";
   }
 
   // Функция для скрытия модального окна
   function hideModal() {
-    var modal = document.getElementById('modal');
+    const modal = document.getElementById('modal');
     modal.style.display = "none";
   }
 
@@ -60,10 +60,10 @@
   // Функция проверки через WebSocket
   // Функция проверки через WebSocket
   function pruefeAusweisAppWebSocket() {
-    var registerButton = document.getElementById('registerButton');
+    const registerButton = document.getElementById('registerButton');
     registerButton.disabled = true; // Делаем кнопку неактивной
 
-    var wsVerbindung = new WebSocket('ws://localhost:24727/eID-Kernel');
+    const wsVerbindung = new WebSocket('ws://localhost:24727/eID-Kernel');
 
     wsVerbindung.onopen = function () {
       console.log('AusweisApp WebSocket-Verbindung hergestellt.');
