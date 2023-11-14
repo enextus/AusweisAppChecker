@@ -13,7 +13,7 @@
     }
 
     .btn-custom-size {
-      transform: scale(3);
+      transform: scale(1);
     }
   </style>
 </head>
@@ -76,6 +76,10 @@
       registerButton.disabled = false; // Снова делаем кнопку активной
     };
   }
+
+  wsVerbindung.onclose = function (event) {
+    console.log('AusweisApp WebSocket-Verbindung geschlossen.', event);
+  };
 
   // Event-Listener для кнопки регистрации
   document.getElementById('registerButton').addEventListener('click', function() {
