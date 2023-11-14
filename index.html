@@ -40,6 +40,13 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+    // Обработчики для закрытия модального окна
+    document.querySelectorAll('[data-dismiss="modal"]').forEach(function(button) {
+      button.addEventListener('click', hideModal);
+    });
+  });
+
   // Функция для отображения модального окна
   function showModal() {
     const modal = document.getElementById('modal');
@@ -57,12 +64,19 @@
     button.addEventListener('click', hideModal);
   });
 
+  let wsVerbindung = null; // Инициализация переменной для WebSocket соединения
+
+  // Функция проверки через WebSocket
+
   // Функция проверки через WebSocket
   function pruefeAusweisAppWebSocket() {
     const registerButton = document.getElementById('registerButton');
     registerButton.disabled = true; // Делаем кнопку неактивной
 
-    const wsVerbindung = new WebSocket('ws://localhost:24727/eID-Kernel');
+    // Проверяем, существует ли уже WebSocket соединение и находится ли оно в активном состоянии
+    if (!wsVerbindung || wsVerbindung.readyState !== WebSocket.OPEN) {
+      wsVerbindung = new WebSocket('ws://localhost:24727/eID-Kernel');
+    }
 
     wsVerbindung.onopen = function () {
       console.log('AusweisApp WebSocket-Verbindung hergestellt.');
@@ -81,6 +95,7 @@
 
     wsVerbindung.onclose = function (event) {
       console.log('AusweisApp WebSocket-Verbindung geschlossen.', event);
+      registerButton.disabled = false; // Снова делаем кнопку активной
     };
   }
 
